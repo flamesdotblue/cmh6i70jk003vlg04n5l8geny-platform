@@ -1,28 +1,51 @@
-import { useState } from 'react'
+import { useEffect } from 'react';
+import Hero from './components/Hero';
+import FeaturedListings from './components/FeaturedListings';
+import AboutUs from './components/AboutUs';
+import ContactUs from './components/ContactUs';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = 'smooth';
+    return () => {
+      document.documentElement.style.scrollBehavior = '';
+    };
+  }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
+    <div className="min-h-screen bg-[#0b1a2b] text-white font-inter">
+      <header className="fixed top-0 left-0 right-0 z-50">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="mt-4 rounded-full bg-white/5 backdrop-blur supports-[backdrop-filter]:bg-white/10 border border-white/10 shadow-lg">
+            <nav className="flex items-center justify-between px-6 py-3">
+              <a href="#home" className="flex items-center gap-2">
+                <div className="h-8 w-8 rounded-full bg-gradient-to-br from-[#C5A35A] to-[#8E6B2D]" />
+                <span className="text-sm tracking-widest uppercase text-white/90">LuxEstate</span>
+              </a>
+              <ul className="hidden md:flex items-center gap-8 text-sm">
+                <li><a className="hover:text-[#C5A35A] transition-colors" href="#home">Home</a></li>
+                <li><a className="hover:text-[#C5A35A] transition-colors" href="#featured">Featured Listings</a></li>
+                <li><a className="hover:text-[#C5A35A] transition-colors" href="#about">About Us</a></li>
+                <li><a className="hover:text-[#C5A35A] transition-colors" href="#contact">Contact Us</a></li>
+              </ul>
+              <a href="#contact" className="hidden md:inline-flex items-center rounded-full bg-gradient-to-r from-[#C5A35A] to-[#A1843C] px-4 py-2 text-xs font-medium text-[#0b1a2b] shadow hover:shadow-lg transition-shadow">Schedule a Viewing</a>
+            </nav>
+          </div>
         </div>
-      </div>
-    </div>
-  )
-}
+      </header>
 
-export default App
+      <main>
+        <section id="home"><Hero /></section>
+        <section id="featured"><FeaturedListings /></section>
+        <section id="about"><AboutUs /></section>
+        <section id="contact"><ContactUs /></section>
+      </main>
+
+      <footer className="border-t border-white/10">
+        <div className="mx-auto max-w-7xl px-4 py-10 text-center text-xs text-white/60">
+          © {new Date().getFullYear()} LuxEstate Realty. All rights reserved.
+        </div>
+      </footer>
+    </div>
+  );
+}
